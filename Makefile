@@ -1,6 +1,6 @@
 .PHONY: build buildAndRun run
 
-buildAndRun: ca-certificates.crt build run
+buildAndRun: ca-certificates.crt
 	docker compose up --build
 
 ca-certificates.crt:
