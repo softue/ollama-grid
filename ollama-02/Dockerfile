@@ -7,4 +7,4 @@ WORKDIR /app
 COPY ollama.sh .
 COPY ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
-RUN bash /app/run.sh
+RUN bash /app/ollama.sh
