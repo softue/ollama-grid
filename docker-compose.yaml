@@ -1,0 +1,45 @@
+services:
+
+  web:
+    image: nginx:stable-alpine
+    container_name: ollamagrid-web
+    volumes:
+      - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    networks:
+      - ollamagrid
+
+  ollama-01:
+    image: ollama/ollama
+    container_name: ollamagrid-node-01
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    build:
+      dockerfile: ollama-01/Dockerfile
+    volumes:
+      - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
+    ports:
+      - "11431:11434"
+    networks:
+      - ollamagrid
+
+  ollama-02:
+    image: ollama/ollama
+    container_name: ollamagrid-node-02
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    build:
+      dockerfile: ollama-01/Dockerfile
+    volumes:
+      - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
+    ports:
+      - "11432:11434"
+    networks:
+      - ollamagrid
+
+networks:
+  ollamagrid:
+    driver: bridge
