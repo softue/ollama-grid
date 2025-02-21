@@ -40,6 +40,17 @@ services:
     networks:
       - ollamagrid
 
+  ollama-03:
+    image: ollama/ollama
+    container_name: ollamagrid-node-03
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+    ports:
+      - "11433:11434"
+    networks:
+      - ollamagrid
+
 networks:
   ollamagrid:
     driver: bridge
